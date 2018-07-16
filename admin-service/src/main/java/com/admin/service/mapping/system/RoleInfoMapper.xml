@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.admin.service.mapper.system.RoleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.admin.client.model.system.RoleInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="level" property="level" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="menu_ids" property="menuIds" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+	<select id="queryById" resultMap="BaseResultMap" parameterType="int">
+		select r.*, i.role_name as parentName 
+		from system_role_info r
+		left join system_role_info i on i.id = r.parent_id 
+		where r.id = #{id}
+	</select>
+	
+	<select id="queryByParentId" resultMap="BaseResultMap" parameterType="int">
+		select r.*, i.role_name as parentName 
+		from system_role_info r
+		left join system_role_info i on i.id = r.parent_id 
+		<if test="parentId != null">
+			where r.parent_id = #{parentId}
+		</if>
+	</select>
+	
+</mapper>

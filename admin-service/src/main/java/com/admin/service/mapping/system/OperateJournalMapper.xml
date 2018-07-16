@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.admin.service.mapper.system.OperateJournalMapper" >
+  <resultMap id="BaseResultMap" type="com.admin.client.model.system.OperateJournal" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="journal_type" property="journalType" jdbcType="INTEGER" />
+    <result column="user_id" property="user_id" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+    <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+    <result column="ip_addr" property="ipAddr" jdbcType="VARCHAR" />
+    <result column="request_path" property="requestPath" jdbcType="VARCHAR" />
+    <result column="request_parameter" property="requestParameter" jdbcType="LONGVARCHAR" />
+    <result column="exception_journal" property="exceptionJournal" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+    
+ 	<sql id="conditions" >
+		<if test="journalType != null and journalType != 0 ">
+			and journal_type=#{journalType}
+		</if>
+		<if test="userName != null and userName != '' ">
+			and user_name like '%${userName}%'
+		</if>
+		<if test="userMobile != null and userMobile != '' ">
+			and user_mobile like '%${userMobile}%'
+		</if>
+		<if test="operateName != null and operateName != '' ">
+			and operate_name like '%${operateName}%'
+		</if>
+		<if test="requestPath != null and requestPath != '' ">
+			and request_path like '%${requestPath}%'
+		</if>
+		<if test="strDate != null and strDate != ''">
+			<![CDATA[ and create_time >= #{strDate}]]>
+		</if>
+		<if test="endDate != null and endDate != ''">
+			<![CDATA[ and create_time < #{endDate}]]>
+		</if>
+	</sql>
+
+    <select id="queryCount" resultType="int" parameterType="map">
+      select count(*) from system_operate_journal  where 1=1
+      <include refid="conditions"/>	
+    </select>
+    
+    <select id="query" resultMap="BaseResultMap" parameterType="map">
+       select id, journal_type, user_name, user_mobile, operate_name, request_path, create_time ,ip_addr
+       from system_operate_journal where 1=1
+       <include refid="conditions"/>
+       order by create_time desc	
+      <if test="start != null and length != null">
+			limit #{start}, #{length};
+		</if>
+    </select>
+
+</mapper>

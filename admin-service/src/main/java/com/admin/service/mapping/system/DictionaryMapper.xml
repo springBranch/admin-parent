@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.admin.service.mapper.system.DictionaryMapper" >
+  <resultMap id="BaseResultMap" type="com.admin.client.model.system.Dictionary" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dict_key" property="dictKey" jdbcType="VARCHAR" />
+    <result column="dict_value" property="dictValue" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="comments" property="comments" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <!-- for 搜索栏 -->
+	<sql id="conditions">
+		<if test="dictKeyName != null and dictKeyName != '' ">
+			and dict_key_name like '%${dictKeyName}%' 
+		</if>
+		<if test="dictKey != null and dictKey != '' ">
+			and dict_key like '%${dictKey}%' 
+		</if>
+		
+    </sql>
+ 
+   <!-- 查询总记录数 -->
+	<select id="queryCount" resultType="int" parameterType="map">
+		select count(*) from system_dictionary  where 1=1
+		<include refid="conditions"/>
+	</select>
+
+	<!-- 查询列表 -->
+	<select id="query" resultMap="BaseResultMap" parameterType="map">
+		select * from system_dictionary where 1=1 
+		<include refid="conditions"/>
+		order by dict_key,id 
+       	<if test="start != null and length != null">
+			limit #{start}, #{length};
+		</if>
+	</select>
+	
+	<!--查询某个key列表  -->
+	<select id="queryByKey" resultMap="BaseResultMap" parameterType="String">
+		select * from system_dictionary where dict_key=#{dictKey}
+	</select>
+	
+	<!--查询一系列key列表  -->
+	<select id="queryByKeys" resultMap="BaseResultMap">
+		select * from system_dictionary where dict_key in 
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+	</select>
+
+</mapper>

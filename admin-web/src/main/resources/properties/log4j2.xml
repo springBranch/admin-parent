@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <properties>
+        <property name="CONSUMER_LOG_HOME">/data/logs/tomcat/prdcenter</property>
+        <property name="CONSUMER_FILE_NAME">consumerLog</property>
+    </properties>
+    <Appenders>
+        <!-- 控制台输出配置 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout charset="utf-8" pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+
+        <RollingRandomAccessFile name="ConsumerLogFile"
+                                 fileName="${CONSUMER_LOG_HOME}/${CONSUMER_FILE_NAME}.log"
+                                 filePattern="${CONSUMER_LOG_HOME}/$${date:yyyy-MM}/${CONSUMER_FILE_NAME}-%d{yyyy-MM-dd HH}-%i.log">
+            <PatternLayout charset="utf-8"
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="2"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <!-- 指定最多保存的文件个数 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+        <!-- 异步写日志-->
+        <Async name="Async">
+            <AppenderRef ref="ConsumerLogFile"/>
+        </Async>
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="Async"/>
+        </Root>
+    </Loggers>
+</Configuration>

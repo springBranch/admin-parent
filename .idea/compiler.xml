@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="admin-client" />
+        <module name="admin-common" />
+        <module name="admin-service" />
+        <module name="admin-web" />
+        <module name="beidou-prdcenter-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel target="1.7">
+      <module name="admin-client" target="1.8" />
+      <module name="admin-common" target="1.8" />
+      <module name="admin-parent" target="1.8" />
+      <module name="admin-service" target="1.8" />
+      <module name="admin-web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
