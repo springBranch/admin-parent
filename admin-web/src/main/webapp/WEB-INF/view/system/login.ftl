@@ -23,19 +23,19 @@
 						<label class="beg-login-icon">
                         <i class="layui-icon">&#xe612;</i>
                     </label>
-						<input type="text" name="mobile" lay-verify="phone" value="13262872357" autocomplete="off" placeholder="请输入手机号" class="layui-input" maxlength="11">
+						<input type="text" name="mobile" lay-verify="phone" autocomplete="off" placeholder="请输入手机号" class="layui-input" maxlength="11">
 					</div>
 					<div class="layui-form-item">
 						<label class="beg-login-icon">
                         <i class="layui-icon">&#xe642;</i>
                     </label>
-						<input type="password" name="password" lay-verify="required" value="13262872357" autocomplete="off" placeholder="请输入密码" class="layui-input">
+						<input type="password" name="password" lay-verify="required"  autocomplete="off" placeholder="请输入密码" class="layui-input">
 					</div>
 					<div class="layui-form-item">
 						<label class="beg-login-icon">
                         <i class="layui-icon">&#xe60d;</i>
                     </label>
-						<input type="text" name="verifyCode"  lay-verify="required" autocomplete="off" value="1234" placeholder="请输入图片验证码" class="layui-input" maxlength="4">
+						<input type="text" name="verifyCode"  lay-verify="required" autocomplete="off" placeholder="请输入图片验证码" class="layui-input" maxlength="4">
 					</div>
 					<div class="layui-form-item">
 						<div class="beg-pull-left beg-login-remember" id="authImage">

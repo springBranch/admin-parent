@@ -76,10 +76,9 @@ public class HomeController {
             if (StringUtils.isBlank(code)) {
                 return BaseResult.failed("图片验证码失效");
             }
-            ////测试关闭验证码
-            //if (!code.equalsIgnoreCase(verifyCode)) {
-            //    return BaseResult.failed("图片验证码错误");
-            //}
+            if (!code.equalsIgnoreCase(verifyCode)) {
+                return BaseResult.failed("图片验证码错误");
+            }
             //密码加密
             UserInfo user = iUserInfoService.queryForLogin(mobile.trim(), password.trim());
             if (user == null) {
