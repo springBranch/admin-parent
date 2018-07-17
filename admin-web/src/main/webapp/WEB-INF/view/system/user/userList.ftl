@@ -7,10 +7,6 @@
 
 	<body>
 		<div class="layui-tab-content ">
-			<a class="layui-r" href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="font-size: 30px; color: #1E9FFF;">&#x1002;</i></a>
-			<fieldset class="layui-elem-field layui-field-title">
-				<legend>系统管理  > 用户列表</legend>
-			</fieldset>
 			<form class="layui-form layui-form-pane" action="${ctx!}/system/userinfo/list" method="post" id="myForm">
 				<input type="hidden" name="pageIndex" id="pageIndex" value="${pageIndex }"/>	
 				<input type="hidden" name="pageSize" id="pageSize" value="${pageSize }"/>
