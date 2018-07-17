@@ -99,10 +99,7 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources/properties</directory>
-                <includes>
-                    <include>**</include>
-                </includes>
+                <directory>src/main/resources</directory>
             </resource>
         </resources>
         <plugins>
