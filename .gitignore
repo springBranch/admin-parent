@@ -3,3 +3,6 @@
 *.iml
 */*.iml
 */target
+
+**/*.iml
+/admin-service/admin-service.iml
