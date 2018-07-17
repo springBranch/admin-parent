@@ -39,8 +39,8 @@ layui.use(['layer', 'form'], function() {
         $('.larry-canvas').width(w).height(h);
     }).resize();
 	
-	$("#canvas").jParticle({
-        background: "#141414",
-        color: "#E5E5E5"
-    });
+    // $("#canvas").jParticle({
+    //     background: "#141414",
+    //     color: "#E5E5E5"
+    // });
 });
