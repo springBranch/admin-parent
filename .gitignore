@@ -6,3 +6,4 @@
 
 **/*.iml
 /admin-service/admin-service.iml
+/admin-service/src/test/java/com/admin/service/*.java

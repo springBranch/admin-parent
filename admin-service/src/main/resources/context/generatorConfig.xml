@@ -2,9 +2,8 @@
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
-
 <generatorConfiguration>
-    <classPathEntry location="E:/.m2/repository/mysql/mysql-connector-java/5.1.39/mysql-connector-java-5.1.39.jar"/>
+    <properties resource="../properties/jdbc.properties"/>
     <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
@@ -12,25 +11,31 @@
             <!-- caseSensitive默认false，当数据库表名区分大小写时，可以将该属性设置为true -->
             <property name="caseSensitive" value="true"/>
         </plugin>
+
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://192.168.1.159:3306/prdcenter_dev" userId="dev"
-                        password="Bd@360ycf"/>
+        <jdbcConnection driverClass="${jdbc.driverClassName}"
+                        connectionURL="${jdbc.url}}"
+                        userId="${jdbc.username}"
+                        password="${jdbc.password}"/>
 
-        <javaModelGenerator targetPackage="com.beidou.prdcenter.client.model.sql.operate"
-                            targetProject="E:/workspace_beidou/beidou-prdcenter_3.0.0/beidou-prdcenter-client/src/main/java"/>
+        <!--实体对象-->
+        <javaModelGenerator targetPackage="com.admin.client.model.other"
+                            targetProject="${admin-client}/src/main/java">
+        </javaModelGenerator>
 
-        <sqlMapGenerator targetPackage="com.beidou.prdcenter.remote.mapping.operate" targetProject="src/main/java"/>
+        <!--xml文件-->
+        <sqlMapGenerator targetPackage="com.admin.service.mapping.other"
+                         targetProject="src/main/java">
+        </sqlMapGenerator>
 
-        <javaClientGenerator targetPackage="com.beidou.prdcenter.remote.mapper.operate" targetProject="src/main/java"
-                             type="XMLMAPPER"/>
+        <!--mapper接口-->
+        <javaClientGenerator targetPackage="com.admin.service.mapping.other"
+                             targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
 
-        <!--<table tableName="%" >-->
-        <!--&lt;!&ndash;<generatedKey column="id" sqlStatement="Mysql" identity="true"/>&ndash;&gt;-->
-        <!--</table>-->
-
-        <table tableName="product_checking_team" domainObjectName="ProductCheckingTeam">
+        <table tableName="test" >
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 

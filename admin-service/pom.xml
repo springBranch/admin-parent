@@ -12,7 +12,9 @@
         <artifactId>admin-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-
+    <properties>
+        <admin-client>../admin-client</admin-client>
+    </properties>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
@@ -73,6 +75,19 @@
             <artifactId>mybatis-spring</artifactId>
             <version>1.3.1</version>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>3.2.4.RELEASE</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -84,8 +99,40 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/properties</directory>
+                <includes>
+                    <include>**</include>
+                </includes>
             </resource>
         </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-maven-plugin</artifactId>
+                <version>1.3.6</version>
+                <configuration>
+                    <configurationFile>src/main/resources/context/generatorConfig.xml</configurationFile>
+                    <overwrite>true</overwrite>
+                    <verbose>true</verbose>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mybatis.generator</groupId>
+                        <artifactId>mybatis-generator-core</artifactId>
+                        <version>1.3.6</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>tk.mybatis</groupId>
+                        <artifactId>mapper</artifactId>
+                        <version>3.4.4</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.40</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
     </build>
 </project>

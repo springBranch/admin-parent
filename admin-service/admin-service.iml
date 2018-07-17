@@ -11,7 +11,7 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources/properties" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -76,5 +76,8 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-tx:4.2.3.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.3.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.9" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: org.springframework:spring-test:3.2.4.RELEASE" level="project" />
   </component>
 </module>
