@@ -15,15 +15,14 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author songj
@@ -67,7 +66,7 @@ public class HomeController {
     /**
      * 登录
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",params = {"verifyCode"})
     @ResponseBody
     public BaseResult login(HttpServletRequest request, @RequestParam String mobile, @RequestParam String password,
                             @RequestParam String verifyCode) {
@@ -95,6 +94,37 @@ public class HomeController {
             return BaseResult.failed("登陆失败");
         }
     }
+
+    /**
+     * 登录
+     */
+    @RequestMapping("/login")
+    @ResponseBody
+    public BaseResult login(HttpServletRequest request,HttpServletResponse response, @RequestParam String mobile, @RequestParam String password) {
+        try {
+            //密码加密
+            UserInfo user = iUserInfoService.queryForLogin(mobile.trim(), password.trim());
+            if (user == null) {
+                return BaseResult.failed("用户名或密码错误");
+            }
+            user.setLoginTime(new Date());
+            iUserInfoService.updateBySelective(user);
+            RoleInfo role = iRoleInfoService.getById(user.getRoleId());
+            Map result = new HashMap<String,Object>(){{
+                put("user",user);
+                put("userRole",role);
+            }};
+
+            response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+            response.setHeader("Access-Control-Allow-Credentials","true");
+            response.setHeader("Cache-Control", "no-cache");
+            return BaseResult.success(result);
+        } catch (Exception e) {
+            logger.error("用户登陆时出现异常", e);
+            return BaseResult.failed("登陆失败");
+        }
+    }
+
 
     /**
      * 首页

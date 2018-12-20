@@ -54,11 +54,13 @@ public class SystemJurisdictionInterceptor extends HandlerInterceptorAdapter {
                 String[] split = roleInfo.getMenuIds().split(",");
                 for (String menuId : split) {
                     if (menuId.equals(String.valueOf(menu.getId()))) {
+                        super.preHandle(request, response, handler);
                         return true;
                     }
                 }
             }
         } else {
+            super.preHandle(request, response, handler);
             return true;
         }
         response.sendRedirect(request.getContextPath() + "/denied");

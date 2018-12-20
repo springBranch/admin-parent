@@ -25,6 +25,10 @@
             <mvc:exclude-mapping path="/unlock"/>
             <bean class="com.admin.web.interceptor.SystemJurisdictionInterceptor"></bean>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.admin.web.interceptor.PathInterceptor"></bean>
+        </mvc:interceptor>
     </mvc:interceptors>
 
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">

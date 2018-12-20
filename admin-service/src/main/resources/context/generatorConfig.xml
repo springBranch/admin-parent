@@ -35,7 +35,7 @@
                              type="XMLMAPPER">
         </javaClientGenerator>
 
-        <table tableName="test" >
+        <table tableName="test" catalog="order_info">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
         </table>
 
